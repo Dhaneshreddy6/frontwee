@@ -1,0 +1,45 @@
+<form (ngSubmit)="onSubmit()" class="review-form">
+  <div class="rating-selector mb-3">
+    <label class="form-label block mb-1">Rating</label>
+    <div class="stars-row">
+      @for (star of [1, 2, 3, 4, 5]; track star) {
+        <span 
+          (click)="setRating(star)" 
+          class="star-clickable" 
+          [ngClass]="{'active': star <= rating()}">
+          ★
+        </span>
+      }
+    </div>
+  </div>
+
+  <div class="form-group mb-3">
+    <label class="form-label">Review Title</label>
+    <input 
+      type="text" 
+      name="title" 
+      [(ngModel)]="reviewForm.title" 
+      required 
+      class="form-input" 
+      placeholder="Summarize your stay" />
+  </div>
+
+  <div class="form-group mb-3">
+    <label class="form-label">Detailed Experience</label>
+    <textarea 
+      name="comment" 
+      [(ngModel)]="reviewForm.comment" 
+      required 
+      rows="4" 
+      class="form-input" 
+      placeholder="How was the service, food, and room comfort?"></textarea>
+  </div>
+
+  <button type="submit" [disabled]="submitting()" class="btn btn-primary w-full mt-2">
+    @if (submitting()) {
+      <span class="loader"></span>
+    } @else {
+      Submit Review
+    }
+  </button>
+</form>

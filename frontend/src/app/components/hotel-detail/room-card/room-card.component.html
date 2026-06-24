@@ -1,0 +1,31 @@
+<div class="room-card glass-card mb-4">
+  <div class="room-main-info">
+    <div class="room-details-left">
+      <div class="room-type-header">
+        <h3 class="room-type">{{ room().roomType }}</h3>
+        <span class="badge" [ngClass]="room().isAvailable ? 'badge-success' : 'badge-danger'">
+          {{ room().isAvailable ? 'Available' : 'Booked Out' }}
+        </span>
+      </div>
+      <p class="room-desc">Spacious and modern layout with state-of-the-art bedding, clean linens, and luxury bathroom features.</p>
+      
+      <div class="room-amenities">
+        @for (am of getAmenities(room().amenities); track am) {
+          <span class="room-am-badge">✓ {{ am }}</span>
+        }
+      </div>
+    </div>
+
+    <div class="room-price-right">
+      <span class="price-num">{{ (room().pricePerNight || room().price) | currency:'INR' }}</span>
+      <span class="price-lbl">per night</span>
+
+      <button 
+        (click)="onBookClick()" 
+        [disabled]="!room().isAvailable"
+        class="btn btn-primary w-full mt-3">
+        Book Room
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,87 @@
+<form (ngSubmit)="onSubmit()" #registerForm="ngForm">
+  <h2 class="form-title">Create Account</h2>
+  <p class="form-subtitle">Join SmartHotel rewards and start booking</p>
+
+  <div class="form-group">
+    <label class="form-label">Full Name</label>
+    <input 
+      type="text" 
+      name="name"
+      [(ngModel)]="registerData.name"
+      required
+      minlength="3"
+      #regName="ngModel"
+      class="form-input" 
+      placeholder="full name" />
+    <span class="validation-error" *ngIf="regName.touched && regName.invalid">
+      Name is required (min 3 chars)
+    </span>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Email Address</label>
+    <input 
+      type="email" 
+      name="email"
+      [(ngModel)]="registerData.email"
+      required
+      email
+      #regEmail="ngModel"
+      class="form-input" 
+      placeholder="your email " />
+    <span class="validation-error" *ngIf="regEmail.touched && regEmail.invalid">
+      Enter a valid email address
+    </span>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Contact Number</label>
+    <input 
+      type="tel" 
+      name="contact"
+      [(ngModel)]="registerData.contactNumber"
+      required
+      #regContact="ngModel"
+      class="form-input" 
+      placeholder="+910000000" />
+    <span class="validation-error" *ngIf="regContact.touched && regContact.invalid">
+      Contact number is required
+    </span>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label">Password</label>
+    <input 
+      type="password" 
+      name="password"
+      [(ngModel)]="registerData.password"
+      required
+      minlength="6"
+      #regPwd="ngModel"
+      class="form-input" 
+      placeholder="•••••••• (min 6 characters)" />
+    <span class="validation-error" *ngIf="regPwd.touched && regPwd.invalid">
+      Password must be at least 6 characters
+    </span>
+  </div>
+
+  <!-- <div class="form-group">
+    <label class="form-label">User Role</label>
+    <select 
+      name="role"
+      [(ngModel)]="registerData.role"
+      class="form-input select-input">
+      <option value="Guest">Guest / Traveler</option>
+      <option value="Manager">Hotel Manager</option>
+      <option value="Admin">Administrator</option>
+    </select>
+  </div> -->
+
+  <button 
+    type="submit" 
+    [disabled]="registerForm.invalid || loading()" 
+    class="btn btn-primary w-full mt-4">
+    <span *ngIf="!loading()">Register</span>
+    <span *ngIf="loading()" class="loader"></span>
+  </button>
+</form>

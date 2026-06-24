@@ -1,0 +1,51 @@
+<div class="booking-item">
+  <div class="booking-header">
+    <div>
+      <span class="booking-hotel-name">Hotel Booking #{{ booking().bookingId }}</span>
+      <span class="booking-room">Room #{{ booking().roomId }} (Guests: {{ booking().numberOfGuests }})</span>
+    </div>
+    <span class="badge" [ngClass]="getBookingStatusClass(booking().status)">
+      {{ booking().status }}
+    </span>
+  </div>
+
+  <div class="booking-details-grid">
+    <div class="detail-cell">
+      <span class="detail-label">Check In</span>
+      <span class="detail-val">{{ booking().checkInDate | date:'mediumDate' }}</span>
+    </div>
+    <div class="detail-cell">
+      <span class="detail-label">Check Out</span>
+      <span class="detail-val">{{ booking().checkOutDate | date:'mediumDate' }}</span>
+    </div>
+    <div class="detail-cell">
+      <span class="detail-label">Guest Contact</span>
+      <span class="detail-val text-truncate">{{ booking().guestEmail }}</span>
+    </div>
+    <div class="detail-cell">
+      <span class="detail-label">Total Cost</span>
+      <span class="detail-val cost">{{ booking().totalAmount | currency:'INR' }}</span>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="booking-actions mt-3">
+    @if (booking().status === 'Pending' || (booking().status === 'Confirmed' && !booking().paymentId)) {
+      <button (click)="onPayClick()" class="btn btn-primary btn-sm">
+        💳 Pay Now
+      </button>
+    }
+
+    @if (booking().status === 'Confirmed' || booking().status === 'Completed' || booking().status === 'Paid') {
+      <button (click)="onReviewClick()" class="btn btn-secondary btn-sm">
+        ⭐ Write Review
+      </button>
+    }
+
+    @if (booking().status === 'Pending' || booking().status === 'Confirmed') {
+      <button (click)="onCancelClick()" class="btn btn-danger btn-sm">
+        Cancel
+      </button>
+    }
+  </div>
+</div>

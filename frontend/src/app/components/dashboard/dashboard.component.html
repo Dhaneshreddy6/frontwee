@@ -1,0 +1,114 @@
+<div class="dashboard-container container animate-fade-in">
+  
+  <!-- Loyalty Header Panel Component -->
+  <app-loyalty-panel 
+    [userName]="auth.currentUser()?.name || 'Guest'"
+    [loyaltyAccount]="loyalty.loyaltyAccount()"
+    (join)="joinLoyalty()">
+  </app-loyalty-panel>
+
+  <!-- Main Columns -->
+  <div class="dashboard-grid">
+    <!-- Bookings Column -->
+    <div class="bookings-section glass-card">
+      <h2 class="section-title mb-4">My Hotel Bookings</h2>
+
+      @if (bookingService.bookings().length === 0) {
+        <div class="empty-state">
+          <span class="empty-icon">📅</span>
+          <h3>No Bookings Found</h3>
+          <p>You haven't booked any rooms yet. Browse our selection of luxury hotels!</p>
+        </div>
+      } @else {
+        @for (booking of bookingService.bookings(); track booking.bookingId) {
+          <app-booking-item 
+            [booking]="booking"
+            (pay)="openPayment($event)"
+            (review)="openReviewModal($event)"
+            (cancel)="openCancelModal($event)">
+          </app-booking-item>
+        }
+      }
+    </div>
+
+    <!-- Right Side Panel: Points History -->
+    <div class="points-section glass-card">
+      <h2 class="section-title mb-4">Points History</h2>
+
+      @if (loyalty.pointHistory().length === 0) {
+        <div class="empty-state">
+          <span class="empty-icon">🪙</span>
+          <h3>No Transactions</h3>
+          <p>Your point transaction log is empty.</p>
+        </div>
+      } @else {
+        @for (txn of loyalty.pointHistory(); track txn.pointHistoryId) {
+          <div class="txn-item">
+            <div class="txn-info">
+              <span class="txn-desc">{{ txn.description }}</span>
+              <span class="txn-date">{{ txn.createdAt | date:'short' }}</span>
+            </div>
+            <span class="txn-points" [class.positive]="txn.points > 0" [class.negative]="txn.points < 0">
+              {{ txn.points > 0 ? '+' : '' }}{{ txn.points }} pts
+            </span>
+          </div>
+        }
+      }
+    </div>
+  </div>
+</div>
+
+<!-- Payment Modal Component -->
+@if (selectedBookingForPay()) {
+  <app-payment-dialog
+    [booking]="selectedBookingForPay()"
+    [loyaltyAccount]="loyalty.loyaltyAccount()"
+    [pointsDiscount]="pointsDiscount()"
+    [submitting]="isPaying()"
+    [(formModel)]="paymentData"
+    (close)="selectedBookingForPay.set(null)"
+    (pointsChange)="onPointsChange()"
+    (submit)="submitPayment()">
+  </app-payment-dialog>
+}
+
+<!-- Write Review Modal Component -->
+<div class="modal-overlay" *ngIf="selectedBookingForReview()">
+  <div class="modal-card glass-card animate-fade-in">
+    <div class="modal-header">
+      <h2>Write a Review</h2>
+      <button (click)="selectedBookingForReview.set(null)" class="btn-close">✕</button>
+    </div>
+
+    <app-review-form 
+      [submitting]="isSubmittingReview()"
+      (submitReview)="submitReview($event)">
+    </app-review-form>
+  </div>
+</div>
+
+<!-- Cancellation Modal Overlay -->
+<div class="modal-overlay" *ngIf="selectedBookingForCancel()">
+  <div class="modal-card glass-card animate-fade-in">
+    <div class="modal-header">
+      <h2>Cancel Booking</h2>
+      <button (click)="selectedBookingForCancel.set(null)" class="btn-close">✕</button>
+    </div>
+
+    <form (ngSubmit)="submitCancellation()">
+      <p class="modal-warning-text mb-4">
+        Are you sure you want to cancel your reservation for Booking #{{ selectedBookingForCancel()?.bookingId }}?
+      </p>
+
+      <div class="form-group mb-3">
+        <label class="form-label">Reason for Cancellation</label>
+        <textarea name="cancelReason" [(ngModel)]="cancellationReason" required rows="3" class="form-input" placeholder="Change of plans, health issue..."></textarea>
+      </div>
+
+      <div class="grid-cols-2 mt-4">
+        <button type="button" (click)="selectedBookingForCancel.set(null)" class="btn btn-secondary w-full">Keep Booking</button>
+        <button type="submit" [disabled]="isCancelling()" class="btn btn-danger w-full">Confirm Cancellation</button>
+      </div>
+    </form>
+  </div>
+</div>

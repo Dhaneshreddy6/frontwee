@@ -1,0 +1,34 @@
+<div class="auth-wrapper animate-fade-in">
+  <div class="auth-card glass-card">
+    <!-- Tabs -->
+    <div class="auth-tabs">
+      <button 
+        [class.active]="isLoginMode()" 
+        (click)="isLoginMode.set(true)"
+        class="tab-btn">
+        Sign In
+      </button>
+      <button 
+        [class.active]="!isLoginMode()" 
+        (click)="isLoginMode.set(false)"
+        class="tab-btn">
+        Register
+      </button>
+    </div>
+
+    <!-- Forms -->
+    <div class="auth-form-content">
+      @if (isLoginMode()) {
+        <app-login-form 
+          [loading]="isLoading()" 
+          (loginSubmit)="onLogin($event)">
+        </app-login-form>
+      } @else {
+        <app-register-form 
+          [loading]="isLoading()" 
+          (registerSubmit)="onRegister($event)">
+        </app-register-form>
+      }
+    </div>
+  </div>
+</div>

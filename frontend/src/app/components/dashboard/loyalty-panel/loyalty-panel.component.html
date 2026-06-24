@@ -1,0 +1,40 @@
+<div class="loyalty-hero-inner mb-8 glass-card">
+  <div class="hero-left">
+    <span class="reward-spark">✨ SmartHotel Rewards</span>
+    <h1 class="hero-title">Welcome, {{ userName() }}</h1>
+    <p class="hero-desc">Earn points on every stay, convert them to discounts, and unlock elite tiers.</p>
+  </div>
+
+  <div class="hero-right">
+    @if (loyaltyAccount()) {
+      <div class="loyalty-card">
+        <div class="card-tier-indicator">
+          <span class="tier-label">{{ loyaltyAccount().membershipTier }} Member</span>
+          <span class="since-date">Since {{ loyaltyAccount().memberSince | date:'mediumDate' }}</span>
+        </div>
+        
+        <div class="card-balance">
+          <span class="balance-num">{{ loyaltyAccount().pointsBalance }}</span>
+          <span class="balance-label">Available Points</span>
+        </div>
+
+        <div class="card-stats-row">
+          <div class="stat-col">
+            <span class="stat-val">{{ loyaltyAccount().totalPointsEarned }}</span>
+            <span class="stat-lbl">Lifetime Earned</span>
+          </div>
+          <div class="stat-col">
+            <span class="stat-val">{{ loyaltyAccount().totalPointsRedeemed }}</span>
+            <span class="stat-lbl">Redeemed</span>
+          </div>
+        </div>
+      </div>
+    } @else {
+      <div class="loyalty-cta-card">
+        <h3>Join Loyalty Rewards</h3>
+        <p>Get 500 bonus points immediately! Convert points directly to cash discounts at checkout.</p>
+        <button (click)="onJoinClick()" class="btn btn-primary mt-3 w-full">Join Now (Free)</button>
+      </div>
+    }
+  </div>
+</div>

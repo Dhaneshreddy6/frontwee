@@ -1,0 +1,38 @@
+<div class="hotel-card glass-card">
+  <div class="hotel-image-sim" [style.background]="getHotelGradient(hotel().hotelId)">
+    @if (hotel().imageUrl) {
+      <img [src]="hotel().imageUrl" [alt]="hotel().name" class="hotel-card-img" />
+    }
+    <div class="hotel-rating-tag">
+      ⭐ {{ hotel().rating | number:'1.1-1' }}
+    </div>
+    <div class="hotel-price-tag">
+      Rooms from {{ hotel().minPrice || 3500 | currency:'INR' }}
+    </div>
+  </div>
+
+  <div class="hotel-card-body">
+    <div class="hotel-meta">
+      <span class="hotel-loc">📍 {{ hotel().location }}</span>
+    </div>
+    <h3 class="hotel-name">{{ hotel().name }}</h3>
+    <p class="hotel-desc">{{ hotel().description }}</p>
+
+    <div class="hotel-amenities-row">
+      @for (amenity of getAmenities(hotel().amenities); track $index) {
+        <span class="amenity-badge">
+          {{ amenity }}
+        </span>
+      }
+      @if (getAmenities(hotel().amenities).length === 0) {
+        <span class="amenity-badge">Standard Room</span>
+      }
+    </div>
+
+    <div class="hotel-card-footer mt-4">
+      <a [routerLink]="['/hotel', hotel().hotelId]" class="btn btn-primary w-full">
+        Check Rooms
+      </a>
+    </div>
+  </div>
+</div>

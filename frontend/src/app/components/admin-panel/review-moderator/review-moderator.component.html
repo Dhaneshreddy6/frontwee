@@ -1,0 +1,62 @@
+<div class="reviews-admin-section glass-card">
+  <h2 class="section-title mb-4">Guest Feedback Management</h2>
+
+  <div class="form-group mb-4 w-64">
+    <label class="form-label">Filter Reviews by Hotel</label>
+    <select 
+      name="reviewFilterHotelId" 
+      [(ngModel)]="selectedHotelId"
+      (ngModelChange)="onHotelChanged()"
+      class="form-input select-input">
+      <option [value]="0">Select a Hotel</option>
+      @for (h of hotels(); track h.hotelId) {
+        <option [value]="h.hotelId">{{ h.name }}</option>
+      }
+    </select>
+  </div>
+
+  @if (reviews().length === 0) {
+    <div class="empty-state">
+      <span class="empty-icon">⭐</span>
+      <h3>No Reviews Found</h3>
+      <p>Choose a hotel to view and respond to guest reviews.</p>
+    </div>
+  } @else {
+    @for (rev of reviews(); track rev.reviewId) {
+      <div class="review-admin-item mb-4">
+        <div class="review-item-header">
+          <div>
+            <span class="reviewer-name">{{ rev.userName }}</span>
+            <span class="review-stars">{{ getStars(rev.rating) }}</span>
+          </div>
+          <span class="review-date">{{ rev.createdAt | date:'short' }}</span>
+        </div>
+
+        <h4 class="review-title">{{ rev.title }}</h4>
+        <p class="review-body">{{ rev.comment }}</p>
+
+        <!-- Response Form or Output -->
+        <div class="response-box mt-3">
+          @if (rev.managerResponse) {
+            <div class="manager-response-output">
+              <span class="response-title">Your Response:</span>
+              <p class="response-body">{{ rev.managerResponse }}</p>
+            </div>
+          } @else {
+            <div class="response-input-row">
+              <input 
+                type="text" 
+                [name]="'resp-' + rev.reviewId"
+                [(ngModel)]="responses()[rev.reviewId]"
+                class="form-input" 
+                placeholder="Type manager response here..." />
+              <button (click)="onSubmitResponse(rev.reviewId)" class="btn btn-primary btn-sm">
+                Send Response
+              </button>
+            </div>
+          }
+        </div>
+      </div>
+    }
+  }
+</div>

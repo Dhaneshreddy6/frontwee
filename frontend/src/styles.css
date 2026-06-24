@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+ 
+
+:root {
+  --bg-app: #f4f6fa;
+  --bg-surface: #ffffff;
+  --bg-card: rgba(248, 250, 252, 0.9);
+  --bg-card-hover: rgba(241, 245, 249, 1);
+ 
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+ 
+  --accent-indigo: #6366f1;
+  --accent-purple: #ec1414;
+  --accent-gradient: linear-gradient(135deg, #5b3309 0%, #5b3309 100%);
+  --accent-gradient-hover: linear-gradient(135deg, #5b3309 0%, #5b3309 100%);
+ 
+  --color-success: #10b981;
+  --color-success-bg: rgba(16, 185, 129, 0.15);
+  --color-warning: #f59e0b;
+  --color-warning-bg: rgba(245, 158, 11, 0.15);
+  --color-danger: #ef4444;
+  --color-danger-bg: rgba(239, 68, 68, 0.15);
+  --color-info: #0ea5e9;
+  --color-info-bg: rgba(14, 165, 233, 0.15);
+ 
+  --border-color: rgba(15, 23, 42, 0.08);
+  --border-color-hover: rgba(15, 23, 42, 0.16);
+ 
+  --shadow-sm: 0 2px 8px rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.1),
+               0 8px 10px -6px rgba(15, 23, 42, 0.1);
+  --shadow-lg: 0 20px 40px -10px rgba(15, 23, 42, 0.15);
+ 
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(15, 23, 42, 0.06);
+  --glass-shadow: 0 8px 32px 0 rgba(15, 23, 42, 0.05);
+ 
+  --font-family-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-family-title: 'Outfit', sans-serif;
+ 
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 18px;
+  --border-radius-xl: 24px;
+}
+ 
+/* ============================= */
+/* Reset + Base */
+/* ============================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-sans);
+}
+ 
+body {
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: all 0.3s ease;
+  line-height: 1.5;
+}
+ 
+/* ============================= */
+/* Scrollbar */
+/* ============================= */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-app);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color-hover);
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-indigo);
+}
+ 
+/* ============================= */
+/* Typography */
+/* ============================= */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-title);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+ 
+/* ============================= */
+/* Glass Card */
+/* ============================= */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-md);
+  transition: 0.3s;
+}
+ 
+.glass-card:hover {
+  border-color: var(--border-color-hover);
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+ 
+/* ============================= */
+/* Buttons */
+/* ============================= */
+button, .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-family-title);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius-md);
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+}
+ 
+/* Primary */
+.btn-primary {
+  background: #657fb7;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+ 
+.btn-primary:hover {
+  background: #1d4ed8;
+  box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+  transform: translateY(-1px);
+}
+ 
+/* Secondary */
+.btn-secondary {
+  background: #f1f5f9;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+ 
+.btn-secondary:hover {
+  background: #e2e8f0;
+}
+ 
+/* Danger */
+.btn-danger {
+  background: var(--color-danger);
+  color: white;
+}
+ 
+.btn-danger:hover {
+  background: #dc2626;
+}
+ 
+/* ============================= */
+/* Forms */
+/* ============================= */
+.form-group {
+  margin-bottom: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+ 
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+ 
+.form-input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+}
+ 
+.form-input:focus {
+  outline: none;
+  border-color: var(--accent-indigo);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+ 
+/* ============================= */
+/* Badges */
+/* ============================= */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  text-transform: uppercase;
+}
+ 
+.badge-success {
+  background: var(--color-success-bg);
+  color: var(--color-success);
+}
+.badge-danger {
+  background: var(--color-danger-bg);
+  color: var(--color-danger);
+}
+.badge-warning {
+  background: var(--color-warning-bg);
+  color: var(--color-warning);
+}
+.badge-info {
+  background: var(--color-info-bg);
+  color: var(--color-info);
+}
+ 
+/* ============================= */
+/* Animations */
+/* ============================= */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+ 
+.animate-fade-in {
+  animation: fadeIn 0.4s ease forwards;
+}
+ 
+/* ============================= */
+/* Layout */
+/* ============================= */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+ 
+.grid-cols-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+ 
+.grid-cols-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+ 
+@media (max-width: 768px) {
+  .grid-cols-2,
+  .grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+}

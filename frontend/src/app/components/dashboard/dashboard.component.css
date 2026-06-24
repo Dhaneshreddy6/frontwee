@@ -1,0 +1,130 @@
+.dashboard-container {
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+.mb-4 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.mt-4 { margin-top: 1rem; }
+.w-full { width: 100%; }
+
+/* Dashboard Columns */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+@media (max-width: 992px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.section-title {
+  font-size: 1.35rem;
+  border-left: 4px solid var(--accent-indigo);
+  padding-left: 0.75rem;
+}
+
+/* Point transactions list */
+.txn-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 0.5rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.txn-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.txn-desc {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.txn-date {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.txn-points {
+  font-family: var(--font-family-title);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.txn-points.positive {
+  color: var(--color-success);
+}
+
+.txn-points.negative {
+  color: var(--color-danger);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--text-secondary);
+}
+
+.empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+/* Modals styling */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 500px;
+  padding: 2rem;
+  background: var(--bg-surface);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+}
+
+.modal-warning-text {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.grid-cols-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}

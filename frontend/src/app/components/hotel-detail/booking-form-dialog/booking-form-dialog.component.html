@@ -1,0 +1,50 @@
+<div class="modal-overlay">
+  <div class="modal-card glass-card animate-fade-in">
+    <div class="modal-header">
+      <h2>Reserve: {{ room().roomType }}</h2>
+      <button (click)="onCloseClick()" class="btn-close">✕</button>
+    </div>
+
+    <form (ngSubmit)="onSubmit()">
+      <div class="booking-summary-box mb-4">
+        <p>Hotel: <strong>{{ hotelName() }}</strong></p>
+        <p>Dates: <strong>{{ checkIn() | date:'mediumDate' }}</strong> to <strong>{{ checkOut() | date:'mediumDate' }}</strong></p>
+        <p>Total Nights: <strong>{{ getNightsCount() }} nights</strong></p>
+        <p>Estimated Cost: <strong class="cost-text">{{ getEstimatedTotal() | currency:'INR' }}</strong></p>
+      </div>
+
+      <div class="form-group mb-3">
+        <label class="form-label">Guest Full Name</label>
+        <input type="text" name="guestName" [(ngModel)]="formModel().guestName" required class="form-input" placeholder="John Doe" />
+      </div>
+
+      <div class="form-group mb-3">
+        <label class="form-label">Guest Email Address</label>
+        <input type="email" name="guestEmail" [(ngModel)]="formModel().guestEmail" required class="form-input" placeholder="john.doe@example.com" />
+      </div>
+
+      <div class="form-group mb-3">
+        <label class="form-label">Guest Phone Number</label>
+        <input type="tel" name="guestPhone" [(ngModel)]="formModel().guestPhone" required class="form-input" placeholder="+1 234 567 890" />
+      </div>
+
+      <div class="form-group mb-3">
+        <label class="form-label">Number of Guests</label>
+        <input type="number" name="guestsCount" [(ngModel)]="formModel().numberOfGuests" [min]="1" required class="form-input" />
+      </div>
+
+      <div class="form-group mb-3">
+        <label class="form-label">Special Requests (Optional)</label>
+        <textarea name="specialReqs" [(ngModel)]="formModel().specialRequests" rows="3" class="form-input" placeholder="Extra pillows, early checkin, high floor..."></textarea>
+      </div>
+
+      <button type="submit" [disabled]="submitting()" class="btn btn-primary w-full mt-4">
+        @if (submitting()) {
+          <span class="loader"></span>
+        } @else {
+          Confirm & Pay Later
+        }
+      </button>
+    </form>
+  </div>
+</div>

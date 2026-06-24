@@ -1,0 +1,124 @@
+.admin-container {
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+.mb-8 { margin-bottom: 2rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mt-4 { margin-top: 1rem; }
+.w-full { width: 100%; }
+
+.admin-title {
+  font-size: 2rem;
+  font-family: var(--font-family-title);
+}
+
+.admin-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* Tabs block */
+.admin-tabs {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+}
+
+.tab-btn.active {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Columns for Hotels & Rooms creation */
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .admin-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.section-title {
+  font-size: 1.35rem;
+  border-left: 4px solid var(--accent-indigo);
+  padding-left: 0.75rem;
+}
+
+/* Bookings Table */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.bookings-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.85rem;
+}
+
+.bookings-table th {
+  background: rgba(0,0,0,0.2);
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  border-bottom: 2px solid var(--border-color);
+}
+
+.light-theme .bookings-table th {
+  background: rgba(0,0,0,0.02);
+}
+
+.bookings-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.guest-details-cell {
+  display: flex;
+  flex-direction: column;
+}
+
+.guest-details-cell span {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.cost-cell {
+  font-weight: 700;
+  color: var(--color-success);
+}
+
+.badge-success { background: var(--color-success-bg); color: var(--color-success); }
+.badge-warning { background: var(--color-warning-bg); color: var(--color-warning); }
+.badge-danger { background: var(--color-danger-bg); color: var(--color-danger); }
+
+.empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--text-secondary);
+}
+
+.empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}

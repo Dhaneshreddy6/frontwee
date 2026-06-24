@@ -1,0 +1,47 @@
+<div class="glass-card h-full">
+  <h2 class="section-title mb-4">Add Room to Inventory</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group mb-3">
+      <label class="form-label">Select Hotel</label>
+      <select name="roomHotelId" [(ngModel)]="formModel().hotelId" required class="form-input select-input">
+        <option [value]="0">Choose Hotel</option>
+        @for (h of hotels(); track h.hotelId) {
+          <option [value]="h.hotelId">{{ h.name }} ({{ h.location }})</option>
+        }
+      </select>
+    </div>
+    
+    <div class="form-group mb-3">
+      <label class="form-label">Room Number</label>
+      <input type="text" name="roomNumber" [(ngModel)]="formModel().roomNumber" required class="form-input" placeholder="e.g., 101, 304-A" />
+    </div>
+
+    <div class="form-group mb-3">
+      <label class="form-label">Room Type</label>
+      <select name="roomType" [(ngModel)]="formModel().roomType" class="form-input select-input">
+        <option value="Single Room">Single Room</option>
+        <option value="Double Room">Double Room</option>
+        <option value="Deluxe Suite">Deluxe Suite</option>
+        <option value="Presidential Villa">Presidential Villa</option>
+      </select>
+    </div>
+
+    <div class="form-group mb-3">
+      <label class="form-label">Price per Night (₹)</label>
+      <input type="number" name="roomPrice" [(ngModel)]="formModel().pricePerNight" required class="form-input" placeholder="4500" />
+    </div>
+
+    <div class="form-group mb-3">
+      <label class="form-label">Room Amenities (Comma separated)</label>
+      <input type="text" name="roomAms" [(ngModel)]="formModel().amenities" class="form-input" placeholder="AC, Balcony, Mini Bar, TV, Safe" />
+    </div>
+
+    <button type="submit" [disabled]="submitting()" class="btn btn-primary w-full mt-4">
+      @if (submitting()) {
+        <span class="loader"></span>
+      } @else {
+        Add Room
+      }
+    </button>
+  </form>
+</div>

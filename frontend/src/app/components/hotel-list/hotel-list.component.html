@@ -1,0 +1,30 @@
+<div class="hotel-list-container container animate-fade-in">
+  <!-- Search and Filter Bar Component -->
+  <app-hotel-filter 
+    [(filters)]="searchFilters" 
+    (search)="onSearch()">
+  </app-hotel-filter>
+
+  <!-- Hotel Grid -->
+  <main class="hotels-main">
+    <div class="main-header mb-4">
+      <h1 class="results-title">Featured Luxury Accommodations</h1>
+      <span class="results-count">{{ hotelService.hotels().length }} hotels found</span>
+    </div>
+
+    @if (hotelService.hotels().length === 0) {
+      <div class="empty-hotels">
+        <span class="empty-icon">🏨</span>
+        <h3>No Hotels Matching Search</h3>
+        <p>Try expanding your search parameters or check spelling of location.</p>
+        <button (click)="resetSearch()" class="btn btn-secondary mt-3">Reset Search</button>
+      </div>
+    } @else {
+      <div class="hotel-grid">
+        @for (hotel of hotelService.hotels(); track hotel.hotelId) {
+          <app-hotel-card [hotel]="hotel"></app-hotel-card>
+        }
+      </div>
+    }
+  </main>
+</div>

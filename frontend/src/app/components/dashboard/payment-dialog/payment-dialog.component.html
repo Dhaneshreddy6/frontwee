@@ -1,0 +1,68 @@
+<div class="modal-overlay">
+  <div class="modal-card glass-card animate-fade-in">
+    <div class="modal-header">
+      <h2>Pay for Booking #{{ booking().bookingId }}</h2>
+      <button (click)="onCloseClick()" class="btn-close">✕</button>
+    </div>
+
+    <form (ngSubmit)="onSubmit()">
+      <p class="modal-summary">
+        Amount Due: <strong>{{ booking().totalAmount | currency:'INR' }}</strong>
+      </p>
+
+      <!-- Loyalty Redeem choice if user has account -->
+      @if (loyaltyAccount() && loyaltyAccount().pointsBalance > 0) {
+        <div class="loyalty-redeem-section">
+          <div class="form-group">
+            <label class="form-label">Redeem Loyalty Points</label>
+            <div class="redeem-input-row">
+              <input 
+                type="number" 
+                name="pointsToRedeem"
+                [max]="loyaltyAccount().pointsBalance"
+                [(ngModel)]="formModel().pointsToRedeem"
+                (ngModelChange)="onPointsChanged()"
+                class="form-input" 
+                placeholder="0" />
+              <span class="points-max-lbl">/ {{ loyaltyAccount().pointsBalance }} available</span>
+            </div>
+            @if (pointsDiscount() > 0) {
+              <span class="discount-preview">
+                Discount: -{{ pointsDiscount() | currency:'INR' }} (Final due: {{ getFinalAmount() | currency:'INR' }})
+              </span>
+            }
+          </div>
+        </div>
+      }
+
+      <div class="form-group mb-3">
+        <label class="form-label">Cardholder Name</label>
+        <input type="text" name="cardName" [(ngModel)]="formModel().cardHolderName" required class="form-input" placeholder="John Doe" />
+      </div>
+
+      <div class="form-group mb-3">
+        <label class="form-label">Card Number</label>
+        <input type="text" name="cardNumber" [(ngModel)]="formModel().cardNumber" required class="form-input" placeholder="4111 2222 3333 4444" />
+      </div>
+
+      <div class="grid-cols-2 mb-3">
+        <div class="form-group">
+          <label class="form-label">Expiry Date</label>
+          <input type="text" name="expiry" [(ngModel)]="formModel().expiryDate" required class="form-input" placeholder="MM/YY" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">CVV</label>
+          <input type="text" name="cvv" [(ngModel)]="formModel().cvv" required class="form-input" placeholder="123" />
+        </div>
+      </div>
+
+      <button type="submit" [disabled]="submitting()" class="btn btn-primary w-full mt-4">
+        @if (submitting()) {
+          <span class="loader"></span>
+        } @else {
+          Submit Payment ({{ getFinalAmount() | currency:'INR' }})
+        }
+      </button>
+    </form>
+  </div>
+</div>

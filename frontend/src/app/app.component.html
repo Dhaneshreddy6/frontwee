@@ -1,0 +1,24 @@
+<!-- Premium sticky navbar -->
+<app-navbar></app-navbar>
+
+<!-- Main content outlet -->
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<!-- Application Toast notifications -->
+<div 
+  class="toast-notification" 
+  *ngIf="toastService.toast().visible" 
+  [ngClass]="toastService.toast().type">
+  <div class="toast-content">
+    <span class="toast-icon">
+      @if (toastService.toast().type === 'success') { ✓ }
+      @else if (toastService.toast().type === 'error') { ✕ }
+      @else if (toastService.toast().type === 'warning') { ⚠ }
+      @else { ℹ }
+    </span>
+    <span class="toast-message">{{ toastService.toast().message }}</span>
+  </div>
+  <button (click)="toastService.clear()" class="toast-close-btn">✕</button>
+</div>

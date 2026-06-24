@@ -1,0 +1,33 @@
+<div class="analytics-row mb-8">
+  <div class="stat-card glass-card">
+    <span class="stat-icon">📅</span>
+    <div class="stat-info">
+      <span class="stat-num">{{ totalBookings() }}</span>
+      <span class="stat-label">Total Reservations</span>
+    </div>
+  </div>
+
+  <div class="stat-card glass-card">
+    <span class="stat-icon">💰</span>
+    <div class="stat-info">
+      <span class="stat-num">{{ totalRevenue() | currency:'INR' }}</span>
+      <span class="stat-label">Gross Revenue</span>
+    </div>
+  </div>
+
+  <div class="stat-card glass-card">
+    <span class="stat-icon">⏳</span>
+    <div class="stat-info">
+      <span class="stat-num">{{ pendingBookings() }}</span>
+      <span class="stat-label">Pending Payments</span>
+    </div>
+  </div>
+
+  <div class="stat-card glass-card">
+    <span class="stat-icon">✅</span>
+    <div class="stat-info">
+      <span class="stat-num">{{ confirmedBookings() }}</span>
+      <span class="stat-label">Paid / Confirmed</span>
+    </div>
+  </div>
+</div>

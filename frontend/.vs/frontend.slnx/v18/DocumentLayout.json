@@ -1,0 +1,64 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\2492212\\Downloads\\feature-updated-angular-2-verion-sruthi-main\\feature-updated-angular-2-verion-sruthi-main\\frontend\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\2492212\\Downloads\\feature-updated-angular-2-verion-sruthi-main\\feature-updated-angular-2-verion-sruthi-main\\frontend\\src\\app\\components\\hotel-detail\\booking-form-dialog\\booking-form-dialog.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\components\\hotel-detail\\booking-form-dialog\\booking-form-dialog.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\2492212\\Downloads\\feature-updated-angular-2-verion-sruthi-main\\feature-updated-angular-2-verion-sruthi-main\\frontend\\src\\app\\components\\dashboard\\booking-item\\booking-item.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\app\\components\\dashboard\\booking-item\\booking-item.component.ts||{0F2454B1-A556-402D-A7D0-1FDE7F99DEE0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "booking-form-dialog.component.ts",
+              "DocumentMoniker": "C:\\Users\\2492212\\Downloads\\feature-updated-angular-2-verion-sruthi-main\\feature-updated-angular-2-verion-sruthi-main\\frontend\\src\\app\\components\\hotel-detail\\booking-form-dialog\\booking-form-dialog.component.ts",
+              "RelativeDocumentMoniker": "src\\app\\components\\hotel-detail\\booking-form-dialog\\booking-form-dialog.component.ts",
+              "ToolTip": "C:\\Users\\2492212\\Downloads\\feature-updated-angular-2-verion-sruthi-main\\feature-updated-angular-2-verion-sruthi-main\\frontend\\src\\app\\components\\hotel-detail\\booking-form-dialog\\booking-form-dialog.component.ts",
+              "RelativeToolTip": "src\\app\\components\\hotel-detail\\booking-form-dialog\\booking-form-dialog.component.ts",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2026-06-23T03:18:01.684Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "booking-item.component.ts",
+              "DocumentMoniker": "C:\\Users\\2492212\\Downloads\\feature-updated-angular-2-verion-sruthi-main\\feature-updated-angular-2-verion-sruthi-main\\frontend\\src\\app\\components\\dashboard\\booking-item\\booking-item.component.ts",
+              "RelativeDocumentMoniker": "src\\app\\components\\dashboard\\booking-item\\booking-item.component.ts",
+              "ToolTip": "C:\\Users\\2492212\\Downloads\\feature-updated-angular-2-verion-sruthi-main\\feature-updated-angular-2-verion-sruthi-main\\frontend\\src\\app\\components\\dashboard\\booking-item\\booking-item.component.ts",
+              "RelativeToolTip": "src\\app\\components\\dashboard\\booking-item\\booking-item.component.ts",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003213|",
+              "WhenOpened": "2026-06-23T03:17:04.237Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 118,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{40ea2e6b-2121-4bb8-a43e-c83c04b51041}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

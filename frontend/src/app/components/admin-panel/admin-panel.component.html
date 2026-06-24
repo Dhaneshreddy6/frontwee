@@ -1,0 +1,97 @@
+<div class="admin-container container animate-fade-in">
+  <div class="admin-header mb-8">
+    <h1 class="admin-title">Manager Control Panel</h1>
+    <p class="admin-subtitle">Add accommodations, manage rooms, respond to guest reviews, and track bookings.</p>
+  </div>
+
+  <!-- Analytics Cards component -->
+  <app-analytics-stats [bookings]="bookingService.bookings()"></app-analytics-stats>
+
+  <!-- Navigation Tabs -->
+  <div class="admin-tabs glass-card mb-8">
+    <button [class.active]="activeTab() === 'hotels'" (click)="activeTab.set('hotels')" class="tab-btn">🏨 Hotels & Rooms</button>
+    <button [class.active]="activeTab() === 'reviews'" (click)="activeTab.set('reviews')" class="tab-btn">⭐ Guest Reviews</button>
+    <button [class.active]="activeTab() === 'bookings'" (click)="activeTab.set('bookings')" class="tab-btn">📅 Room Bookings</button>
+  </div>
+
+  <!-- HOTELS & ROOMS TAB -->
+  <div *ngIf="activeTab() === 'hotels'" class="admin-grid">
+    <!-- Add Hotel Form Component -->
+    <app-hotel-form-manager
+      [submitting]="isSubmittingHotel()"
+      [(formModel)]="hotelForm"
+      (submit)="submitHotel()">
+    </app-hotel-form-manager>
+
+    <!-- Add Room Form Component -->
+    <app-room-form-manager
+      [hotels]="hotelService.hotels()"
+      [submitting]="isSubmittingRoom()"
+      [(formModel)]="roomForm"
+      (submit)="submitRoom()">
+    </app-room-form-manager>
+  </div>
+
+  <!-- GUEST REVIEWS TAB -->
+  <app-review-moderator
+    *ngIf="activeTab() === 'reviews'"
+    [hotels]="hotelService.hotels()"
+    [reviews]="reviewService.reviews()"
+    [(selectedHotelId)]="selectedHotelIdForReviews"
+    [(responses)]="reviewResponses"
+    (hotelChange)="loadReviewsForHotel()"
+    (submitResponse)="submitResponse($event)">
+  </app-review-moderator>
+
+  <!-- ROOM BOOKINGS TAB -->
+  <div *ngIf="activeTab() === 'bookings'" class="bookings-admin-section glass-card">
+    <h2 class="section-title mb-4">Platform Bookings</h2>
+
+    @if (bookingService.bookings().length === 0) {
+      <div class="empty-state">
+        <span class="empty-icon">📅</span>
+        <h3>No Bookings Recorded</h3>
+        <p>Bookings will appear here once guests complete reservation.</p>
+      </div>
+    } @else {
+      <div class="table-wrapper">
+        <table class="bookings-table">
+          <thead>
+            <tr>
+              <th>Booking ID</th>
+              <th>Hotel ID</th>
+              <th>Room ID</th>
+              <th>Guest Details</th>
+              <th>Dates</th>
+              <th>Cost</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (b of bookingService.bookings(); track b.bookingId) {
+              <tr>
+                <td>#{{ b.bookingId }}</td>
+                <td>{{ b.hotelId }}</td>
+                <td>{{ b.roomId }}</td>
+                <td>
+                  <div class="guest-details-cell">
+                    <strong>{{ b.guestName }}</strong>
+                    <span>{{ b.guestEmail }}</span>
+                  </div>
+                </td>
+                <td>{{ b.checkInDate | date:'shortDate' }} - {{ b.checkOutDate | date:'shortDate' }}</td>
+                <td class="cost-cell">{{ b.totalAmount | currency:'INR' }}</td>
+                <td>
+                  <span class="badge" [ngClass]="getBookingStatusClass(b.status)">
+                    {{ b.status }}
+                  </span>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </div>
+
+</div>

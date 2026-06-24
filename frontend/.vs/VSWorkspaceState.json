@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\components",
+    "\\src\\app\\components\\dashboard",
+    "\\src\\app\\components\\hotel-detail",
+    "\\src\\app\\components\\hotel-detail\\booking-form-dialog",
+    "\\src\\app\\core"
+  ],
+  "SelectedNode": "\\src\\app\\components\\hotel-detail\\booking-form-dialog\\booking-form-dialog.component.ts",
+  "PreviewInSolutionExplorer": false
+}

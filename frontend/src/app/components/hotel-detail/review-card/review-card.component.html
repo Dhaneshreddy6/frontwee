@@ -1,0 +1,30 @@
+<div class="review-item mb-4">
+  <div class="review-item-header">
+    <div class="reviewer-meta">
+      <span class="reviewer-name">{{ review().userName }}</span>
+      @if (review().isVerifiedStay) {
+        <span class="badge badge-success">Verified Stay</span>
+      }
+    </div>
+    <span class="review-stars">{{ getStars(review().rating) }}</span>
+  </div>
+
+  <h4 class="review-title">{{ review().title }}</h4>
+  <p class="review-body">{{ review().comment }}</p>
+
+  <!-- Manager response if present -->
+  @if (review().managerResponse) {
+    <div class="manager-response-box mt-3">
+      <span class="response-title">Manager Response:</span>
+      <p class="response-body">{{ review().managerResponse }}</p>
+    </div>
+  }
+
+  <!-- Helpful marker -->
+  <div class="review-footer mt-2">
+    <button (click)="onHelpfulClick()" class="btn-helpful">
+      👍 Helpful ({{ review().helpfulCount }})
+    </button>
+    <span class="review-date">{{ review().createdAt | date:'mediumDate' }}</span>
+  </div>
+</div>

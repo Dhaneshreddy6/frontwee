@@ -1,0 +1,55 @@
+.hotel-list-container {
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+.mb-4 { margin-bottom: 1rem; }
+.mt-3 { margin-top: 0.75rem; }
+
+/* Hotels Grid Layout */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.results-title {
+  font-size: 1.5rem;
+}
+
+.results-count {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.hotel-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 992px) {
+  .hotel-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .hotel-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.empty-hotels {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--bg-card);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border-color);
+}
+
+.empty-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}

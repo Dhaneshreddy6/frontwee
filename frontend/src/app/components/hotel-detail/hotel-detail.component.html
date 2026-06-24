@@ -1,0 +1,129 @@
+<div class="hotel-detail-container container animate-fade-in" *ngIf="hotelService.currentHotel()">
+  
+  <a routerLink="/" class="back-link mb-4">← Back to Hotels</a>
+
+  <section class="hotel-hero-section glass-card mb-8">
+    <div class="hero-info">
+      <div class="hero-meta">
+        <span class="hotel-loc-tag">📍 {{ hotelService.currentHotel().location }}</span>
+        <span class="star-rating">★ {{ hotelService.currentHotel().rating | number:'1.1-1' }} ({{ reviewService.reviews().length }} Reviews)</span>
+      </div>
+      <h1 class="hotel-detail-title">{{ hotelService.currentHotel().name }}</h1>
+      <p class="hotel-detail-desc">{{ hotelService.currentHotel().description }}</p>
+
+      <div class="hotel-amenities-row mt-4">
+        @for (amenity of getAmenities(hotelService.currentHotel().amenities); track amenity) {
+          <span class="amenity-badge">
+            {{ amenity }}
+          </span>
+        }
+      </div>
+    </div>
+
+    <div class="hero-image-placeholder" [style.background]="getHotelGradient(hotelService.currentHotel().hotelId)"></div>
+  </section>
+
+  <div class="detail-columns-grid">
+    
+    <div class="rooms-column">
+      <div class="rooms-header-card glass-card mb-4">
+        <h2 class="section-title">Available Accommodations</h2>
+        <p class="subtitle-text">Select your stay dates to search current inventory</p>
+
+        <form (ngSubmit)="onSearchRooms()" class="dates-form mt-3">
+          <div class="form-group flex-1">
+            <label class="form-label">Check-In</label>
+            <input 
+              type="date" 
+              name="checkIn"
+              [min]="minDate"
+              [(ngModel)]="dates.checkIn"
+              (ngModelChange)="onDateChange()"
+              class="form-input" 
+              required />
+          </div>
+          
+          <div class="form-group flex-1">
+            <label class="form-label">Check-Out</label>
+            <input 
+              type="date" 
+              name="checkOut"
+              [min]="minCheckOutDate"
+              [(ngModel)]="dates.checkOut"
+              (ngModelChange)="onDateChange()"
+              class="form-input" 
+              required />
+          </div>
+
+          <div class="search-btn-wrapper">
+            <button type="submit" class="btn btn-primary search-rooms-btn">
+              Check Dates
+            </button>
+          </div>
+        </form>
+      </div>
+
+      @if (availableRooms().length === 0) {
+        <div class="empty-state glass-card">
+          <span class="empty-icon">🛏️</span>
+          <h3>No Rooms Found</h3>
+          <p>Please adjust your dates or try searching another accommodation.</p>
+        </div>
+      } @else {
+        @for (room of availableRooms(); track room.roomId) {
+          <app-room-card [room]="room" (book)="bookRoom($event)"></app-room-card>
+        }
+      }
+    </div>
+
+    <div class="reviews-column glass-card">
+      <h2 class="section-title mb-4">Guest Feedback</h2>
+
+      <div *ngIf="reviewService.summaries()" class="summary-stats-box mb-4">
+        <div class="avg-rating-cell">
+          <span class="avg-val">{{ reviewService.summaries().averageRating | number:'1.1-1' }}</span>
+          <span class="avg-stars">★★★★★</span>
+          <span class="avg-count">Based on {{ reviewService.summaries().totalReviews }} reviews</span>
+        </div>
+
+        <div class="rating-bars-cell">
+          @for (row of getStarRows(); track row.stars) {
+            <div class="star-row">
+              <span class="star-lbl">{{ row.stars }}★</span>
+              <div class="rating-bar-bg">
+                <div class="rating-bar-fill" [style.width]="row.percent + '%'"></div>
+              </div>
+              <span class="star-count">{{ row.count }}</span>
+            </div>
+          }
+        </div>
+      </div>
+
+      @if (reviewService.reviews().length === 0) {
+        <div class="empty-state">
+          <span class="empty-icon">⭐</span>
+          <h3>No Reviews Yet</h3>
+          <p>Be the first traveler to stay here and leave a review!</p>
+        </div>
+      } @else {
+        @for (rev of reviewService.reviews(); track rev.reviewId) {
+          <app-review-card [review]="rev" (helpful)="markHelpful($event)"></app-review-card>
+        }
+      }
+    </div>
+
+  </div>
+</div>
+
+@if (activeBookingRoom()) {
+  <app-booking-form-dialog
+    [room]="activeBookingRoom()"
+    [hotelName]="hotelService.currentHotel().name"
+    [checkIn]="dates.checkIn"
+    [checkOut]="dates.checkOut"
+    [submitting]="isReserving()"
+    [(formModel)]="bookingForm"
+    (close)="activeBookingRoom.set(null)"
+    (confirm)="submitReservation()">
+  </app-booking-form-dialog>
+}
